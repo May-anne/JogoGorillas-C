@@ -1,11 +1,17 @@
 #include <stdio.h>
 #include <curses.h>
 
+<<<<<<< HEAD
 int xmax, ymax;
 int escolha, ValorLevel;
 
 int mudarCor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
 {
+=======
+int menu(void){
+    int xmax, ymax;
+    char menu[3][10] = {"Playing", "Ranking", "Exit"};
+>>>>>>> c6b4fd7ed2786dbd73c5c59150a270339d1604be
     int index = 0;
     getmaxyx(stdscr,ymax,xmax);
     WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
