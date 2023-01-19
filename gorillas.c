@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <curses.h>
 
-void menu(void){
+int menu(void){
     int xmax, ymax;
     char menu[3][10] = {"Playing", "Ranking", "Exit"};
     int index = 0;
