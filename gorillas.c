@@ -43,8 +43,9 @@ int menu(void){
                 if(index == 3) 
                         index = 2;
                 break;
-                case KEY_ENTER:
-                //não funciona
+                case 10: //ENTER EM ASCII
+                wclear(janela);
+                clear();
                 mvprintw(2, 7, "voce escolheu: %s",menu[escolha]);
                 break;
                 default:
