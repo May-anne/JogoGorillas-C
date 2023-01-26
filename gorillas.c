@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <curses.h>
+#include <stdlib.h>
+#include <time.h>
 
 int xmax, ymax;
 int escolha, ValorLevel;
@@ -55,6 +57,7 @@ int menu(void){
 
     initscr();
     noecho();
+    curs_set(0);
 
     WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
     box(janela,0,0);
@@ -64,12 +67,35 @@ int menu(void){
 
     if (menu[index] == menu[0])
         picklevel();
-    //else if (menu[index] == menu[1])
-        //ranking();
+  //else if(menu[index] == menu[1])
+  //    ranking();
+    else if (menu[index] == menu[2])
+        endwin();
 
     getch();
     endwin();
 
+}
+int play(int nivel){
+        clear();
+        WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
+        box(janela,0,0);
+        refresh();
+        wrefresh(janela);
+
+        WINDOW * predio1;
+        WINDOW * predio2;
+
+        int h;
+        srand(time(NULL));
+        h = rand() %16+9;
+        predio1 = newwin(19, 10, h, 3); //(altura, comprimento, yinicial, xinicial)
+
+        while(true) {
+            chtype ch = '*';
+            waddch(predio1, ch);
+            wrefresh(predio1);
+        }
 }
 int picklevel (void)
 {
@@ -86,6 +112,7 @@ int picklevel (void)
 
     if (dificuldade[index] == dificuldade[0])
         ValorLevel = 30;
+        play(ValorLevel);
     else if (dificuldade[index] == dificuldade[1])
         ValorLevel = 25;
     else if (dificuldade[index] == dificuldade[2])
