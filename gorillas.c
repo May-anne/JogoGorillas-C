@@ -2,11 +2,10 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <time.h>
+#include "estilo.h"
+int ValorLevel;
 
-int xmax, ymax;
-int escolha, ValorLevel;
-
-int mudarCor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
+/*int mudarCor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
 {
     int index = 0;
     getmaxyx(stdscr,ymax,xmax);
@@ -49,7 +48,8 @@ int mudarCor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
         }
     }
    return index;
-}
+}*/
+
 int menu(void){
     char menu[3][10] = {"Playing", "Ranking", "Exit"};
     char titulo[] = {"GORILLAS"};
@@ -144,5 +144,3 @@ int main(void){
 
     menu();
 }
-
-
