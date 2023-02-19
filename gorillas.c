@@ -108,6 +108,24 @@ int play(int nivel){
         for (int i = 0; i < 8; i++) {
         h = rand() %16+9;
         prefresh(predio, 0, 0, h, 2+c, 30, 18+c);
+        
+        if(i==0){
+
+            //Macaco 1
+            mvprintw(h-3,(c+8)," o");
+            mvprintw(h-2,(c+8),"/|\\");
+            mvprintw(h-1,(c+8),"/ \\");
+            refresh();
+            
+        }else if(i==7){
+
+            //Macaco 2
+            mvprintw(h-3,(c+8)," o");
+            mvprintw(h-2,(c+8),"/|\\");
+            mvprintw(h-1,(c+8),"/ \\");
+            refresh();
+        }
+    
         c = c + 17;
         }
 
