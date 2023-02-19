@@ -77,25 +77,36 @@ int menu(void){
 
 }
 int play(int nivel){
+        initscr();
         clear();
-        WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
-        box(janela,0,0);
         refresh();
-        wrefresh(janela);
 
-        WINDOW * predio1;
-        WINDOW * predio2;
+        WINDOW * predio;
+        predio = newpad(31,155);
+        scrollok(predio, true);
+        start_color();
+        init_pair(1, COLOR_BLACK, COLOR_BLUE);
 
         int h;
+        int c = 0;
         srand(time(NULL));
-        h = rand() %16+9;
-        predio1 = newwin(19, 10, h, 3); //(altura, comprimento, yinicial, xinicial)
 
-        while(true) {
-            chtype ch = '*';
-            waddch(predio1, ch);
-            wrefresh(predio1);
+        for(int i = 0; i < 100; i++){
+            for (int j = 0; j < 50; j++) {
+                wattron(predio, COLOR_PAIR(1));
+                pechochar(predio, '*');
+                wattroff(predio, COLOR_PAIR(1));
+            }
         }
+        
+        for (int i = 0; i < 8; i++) {
+        h = rand() %16+9;
+        prefresh(predio, 0, 0, h, 2+c, 30, 18+c);
+        c = c + 17;
+        }
+
+        wgetch(predio);
+        delwin(predio);
 }
 int picklevel (void)
 {
@@ -110,9 +121,9 @@ int picklevel (void)
 
     int index = mudarCor(dificuldade, titulo);
 
-    if (dificuldade[index] == dificuldade[0])
+    if (dificuldade[index] == dificuldade[0]){
         ValorLevel = 30;
-        play(ValorLevel);
+        play(ValorLevel);}
     else if (dificuldade[index] == dificuldade[1])
         ValorLevel = 25;
     else if (dificuldade[index] == dificuldade[2])
