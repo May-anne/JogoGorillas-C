@@ -81,8 +81,14 @@ int play(int nivel){
         clear();
         refresh();
 
+        WINDOW * janela = newwin(32, 140, 0, 0);
+        box(janela,0,0);
+        refresh();
+        wrefresh(janela);
+
         WINDOW * predio;
         predio = newpad(31,155);
+
         scrollok(predio, true);
         start_color();
         init_pair(1, COLOR_BLACK, COLOR_BLUE);
