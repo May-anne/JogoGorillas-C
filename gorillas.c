@@ -147,37 +147,85 @@ int play(int nivel){
 
         char jogador1[10];
         char jogador2 [20];
-        int ang1;
-        int ang2;
-        int vel1;
-        int vel2;
+        int ang1n,ang2n,vel1n,vel2n;
+        char ang1[5],ang2[5],vel1[5],vel2[5];
         int vez = 0;
+        int controle;
+        
+        while (true)
+        {
+            refresh();
+            echo();
+            if(vez%2==0){ //Vez jogador 1
+                if(vez==0){
+                    
+                    //Coleta nomes dos jogadores e armazena nos arrays
+                    mvprintw(1,1,"Nome Jogador 1: ");
+                    getstr(jogador1);
+                    mvprintw(1,110,"Nome Jogador 2: ");
+                    getstr(jogador2);
 
-        /*while (true) {
-            if (vez == 0) {
-                mvprintw (2,2, "Jogador 1: ");
-                mvprintw (4,2, "Angulo: ");
-                mvprintw (5,2, "Velocidade: ");
+                    //Imprime nomes na tela
+                    mvprintw(1,18,"%s",jogador1);
+                    mvprintw(1,126,"%s",jogador2);
 
-                float anguloRad = (3.14*ang1)/180;
-                int g = 10;
-                float tempo = ((2*vel1)*(sin(anguloRad))/ g;
+                    refresh();
+        
+                }
 
+                //Imprime mensagem de angulo e velocidade na tela e coleta string escrita e imprime na tela
+                mvprintw(2,1,"Angulo:");
+                refresh();
+                getstr(ang1);
+                mvprintw(2,8,"%s",ang1);
+                refresh();
+                ang1n=atoi(ang1);//converte array de char para int
 
-            } else {
-                mvprintw (2,115, "Jogador 2: ");
-                mvprintw (4,115, "Angulo: ");
-                mvprintw (5,115, "Velocidade: ");
+                mvprintw(3,1,"Velocidade:");
+                refresh();
+                getstr(vel1);
+                mvprintw(3,12,"%s",vel1);
+                refresh();
+                vel1n=atoi(vel1);
 
+                mvprintw(2,1,"                                                                    ");
+                mvprintw(3,1,"                                                                    ");
 
-                float anguloRad = (3.14*ang2)/180;
-                int g = 10;
-                float tempo = ((2*vel2)*(sin(anguloRad))/ g;
+                refresh();
+                
+                        
+            }else{ //Vez jogador 2
+
+                mvprintw(2,110,"Angulo:");
+                refresh();
+                getstr(ang2);
+                mvprintw(2,117,"%s",ang2);
+                refresh();
+                ang2n=atoi(ang2);
+
+                mvprintw(3,110,"Velocidade:");
+                refresh();
+                getstr(vel2);
+                mvprintw(3,121,"%s",vel2);
+                refresh();
+                vel2n=atoi(vel2); 
+
+                mvprintw(2,110,"                         ");
+                mvprintw(3,110,"                         ");
+
+                refresh();
             }
 
-        }*/
+            controle=getch();
+            noecho();
+            if(controle=='q'){
+                break;
+            }
 
-        //getch(predio);
+            vez++;
+        }
+        
+        
         delwin(predio);
 
 }
@@ -206,10 +254,7 @@ int picklevel (void)
 
 
 
-
 int main(void){
 
     menu();
 }
-
-
