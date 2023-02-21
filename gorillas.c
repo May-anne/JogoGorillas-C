@@ -166,7 +166,7 @@ int play(int nivel){
                     getstr(jogador2);
 
                     //Imprime nomes na tela
-                    mvprintw(1,18,"%s",jogador1);
+                    mvprintw(1,17,"%s",jogador1);
                     mvprintw(1,126,"%s",jogador2);
 
                     refresh();
