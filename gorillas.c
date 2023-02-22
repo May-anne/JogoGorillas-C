@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <unistd.h>
 
 int xmax, ymax;
 int escolha, ValorLevel;
@@ -106,7 +107,7 @@ int play(int nivel){
         start_color();
         init_pair(1, COLOR_BLACK, COLOR_BLUE);
 
-        int h;
+        int h, hmacaco1;
         int c = 0;
         srand(time(NULL));
 
@@ -130,7 +131,7 @@ int play(int nivel){
             mvprintw(h-2,(c+8),"/|\\");
             mvprintw(h-1,(c+8),"/ \\");
             refresh();
-            int hmacaco1 = h;
+            hmacaco1 = h;
 
         }else if(i==7){
 
@@ -151,15 +152,21 @@ int play(int nivel){
         char ang1[5],ang2[5],vel1[5],vel2[5];
         int vez = 0;
         int controle;
-        
+        int g = 10;
+        WINDOW * banana;
+        banana = newpad(31,155);
+
+
+
         while (true)
         {
             refresh();
             echo();
             if(vez%2==0){ //Vez jogador 1
                 if(vez==0){
-                    
+
                     //Coleta nomes dos jogadores e armazena nos arrays
+                    curs_set(1);//cursor visivel
                     mvprintw(1,1,"Nome Jogador 1: ");
                     getstr(jogador1);
                     mvprintw(1,110,"Nome Jogador 2: ");
@@ -170,7 +177,7 @@ int play(int nivel){
                     mvprintw(1,126,"%s",jogador2);
 
                     refresh();
-        
+
                 }
 
                 //Imprime mensagem de angulo e velocidade na tela e coleta string escrita e imprime na tela
@@ -191,11 +198,37 @@ int play(int nivel){
                 mvprintw(2,1,"                                                                    ");
                 mvprintw(3,1,"                                                                    ");
 
+                curs_set(0);
                 refresh();
-                
-                        
-            }else{ //Vez jogador 2
 
+                //Lançamentp
+                float angRad = (ang1n*3.14)/180;
+                //double seno = sin(angRad); calcular o sen com a função sin()
+                //double cose = cos(angRad);
+                float tempo = abs(((2*vel1n)*(-0.98))/g);
+
+
+                for (float t=0; t < tempo ; t += 0.1) {
+
+                    int x = abs(11 + vel1n * (0.15) * t); // x = abs(11 + vel1n * cose * t)
+                    int y = (hmacaco1-2) - abs((vel1n * (-0.98) * t) + (g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
+
+                    mvprintw(y,x, "Z");
+                    //sleep(5);
+                    //mvprintw(y,x, " ");
+
+                }
+
+
+
+
+
+
+
+
+
+            }else{ //Vez jogador 2
+                curs_set(1);
                 mvprintw(2,110,"Angulo:");
                 refresh();
                 getstr(ang2);
@@ -208,11 +241,12 @@ int play(int nivel){
                 getstr(vel2);
                 mvprintw(3,121,"%s",vel2);
                 refresh();
-                vel2n=atoi(vel2); 
+                vel2n=atoi(vel2);
 
                 mvprintw(2,110,"                         ");
                 mvprintw(3,110,"                         ");
 
+                curs_set(0);
                 refresh();
             }
 
@@ -224,8 +258,8 @@ int play(int nivel){
 
             vez++;
         }
-        
-        
+
+
         delwin(predio);
 
 }
