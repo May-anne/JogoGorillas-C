@@ -88,8 +88,9 @@ int menu(void){
 
     getch();
     endwin();
-
 }
+
+
 int play(int nivel){
         initscr();
         clear();
@@ -107,7 +108,7 @@ int play(int nivel){
         start_color();
         init_pair(1, COLOR_BLACK, COLOR_BLUE);
 
-        int h, hmacaco1;
+        int h, hmacaco1, hmacaco2;
         int c = 0;
         srand(time(NULL));
 
@@ -140,6 +141,7 @@ int play(int nivel){
             mvprintw(h-2,(c+8),"/|\\");
             mvprintw(h-1,(c+8),"/ \\");
             refresh();
+            hmacaco2 = h;
         }
 
         c = c + 17;
@@ -153,8 +155,7 @@ int play(int nivel){
         int vez = 0;
         int controle;
         int g = 10;
-        WINDOW * banana;
-        banana = newpad(31,155);
+
 
 
 
@@ -207,25 +208,27 @@ int play(int nivel){
                 //double cose = cos(angRad);
                 float tempo = abs(((2*vel1n)*(-0.98))/g);
 
-
+                //colisão
                 for (float t=0; t < tempo ; t += 0.1) {
 
-                    int x = abs(11 + vel1n * (0.15) * t); // x = abs(11 + vel1n * cose * t)
+                    int x = 11 + abs(vel1n) * (0.15) * t; // x = abs(11 + vel1n * cose * t)
                     int y = (hmacaco1-2) - abs((vel1n * (-0.98) * t) + (g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
 
                     mvprintw(y,x, "Z");
                     //sleep(5);
                     //mvprintw(y,x, " ");
 
+                    for (int t = 0; t < 8; t++){
+                        if ((y >= hmacaco2-1 && y <= hmacaco2-3) && (x >= 128 && x <= 130 )){
+                        mvprintw(5, 5,"Voce acertou!");
+                        break;
+                    }else
+                        mvprintw(5, 5,"Voce Errou!");
+                        break;
+                    }
+                    refresh();
+
                 }
-
-
-
-
-
-
-
-
 
             }else{ //Vez jogador 2
                 curs_set(1);
@@ -248,6 +251,35 @@ int play(int nivel){
 
                 curs_set(0);
                 refresh();
+
+                //Lançamentp
+                float angRad2 = (ang2n*3.14)/180;
+                //double seno2 = sin(angRad2); calcular o sen com a função sin()
+                //double cose2 = cos(angRad2);
+                float tempo2 = abs(((2*vel2n)*(-0.98))/g);
+
+                //colisão
+                for (float t=0; t < tempo2 ; t += 0.1) {
+
+                    int x2 = 126 - abs(vel2n) * (0.15) * t; // x = abs(126 - vel2n * cose2 * t)
+                    int y2 = (hmacaco2-2) - (abs(vel2n) * (-0.98) * t) + ((g*(t*t))/2); // y = (hmacaco2-1) - abs((vel2n * seno2 * t) + (g*(t*t))/2)
+
+                    mvprintw(y2,x2, "Z");
+                    //sleep(5);
+                    //mvprintw(y2,x2, " ");
+
+                    for (int k = 0; k < 8; k++){
+                        if ((y2 >= hmacaco1-1 && y2 <= hmacaco1-3) && (x2 >= 9 && x2 <= 11 )){
+                        mvprintw(5, 114,"Voce acertou!");
+                        break;
+                    }else {
+                        mvprintw(5, 114,"Voce Errou!");
+                        break;
+                    }
+                    }
+                    refresh();
+
+                }
             }
 
             controle=getch();
