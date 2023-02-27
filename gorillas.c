@@ -222,12 +222,10 @@ int play(int nivel){
                         if ((y >= hmacaco2-1 && y <= hmacaco2-3) && (x >= 128 && x <= 130 )){
                         mvprintw(5, 5,"Voce acertou!");
                         break;
-                    }else
-                        mvprintw(5, 5,"Voce Errou!");
-                        break;
                     }
                     refresh();
 
+                }
                 }
 
             }else{ //Vez jogador 2
@@ -271,9 +269,6 @@ int play(int nivel){
                     for (int k = 0; k < 8; k++){
                         if ((y2 >= hmacaco1-1 && y2 <= hmacaco1-3) && (x2 >= 9 && x2 <= 11 )){
                         mvprintw(5, 114,"Voce acertou!");
-                        break;
-                    }else {
-                        mvprintw(5, 114,"Voce Errou!");
                         break;
                     }
                     }
