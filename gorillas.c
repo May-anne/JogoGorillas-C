@@ -242,7 +242,7 @@ int play(int nivel){
                         break;
                     } else if (y>= Hpredios[6] && (x>=122 && x <=127)){ //inicio do oitavo predio
                         mvprintw(5, 5,"Errou!");
-                        break;
+                        //break;
                     }else
                         colisaoPredio (Hpredios, y, x);
                 }
@@ -296,7 +296,7 @@ int play(int nivel){
                         break;
                     } else {
                         colisaoPredio (Hpredios, y2, x2);
-                        break;
+                        //break;
                     }
 
                     refresh();
