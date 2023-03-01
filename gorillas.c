@@ -92,19 +92,15 @@ int menu(void){
 }
 
 int colisaoPredio (int Hpredios [], int y, int x){ //verificação se bateu no segundo ou nos proxs até o sétimo prédio.
-    if (y>= Hpredios[1] && (x>=20 && x <=36))
+    if ((y>= Hpredios[1] && (x>=20 && x <=36))||(y>= Hpredios[2] && (x>=37 && x <=53))||(y>= Hpredios[3] && (x>=54 && x <=70))||
+    (y>= Hpredios[4] && (x>=71 && x <=87))||(y>= Hpredios[5] && (x>=88 && x <=104))|| (y>= Hpredios[5] && (x>=88 && x <=104))||
+    (y>= Hpredios[6] && (x>=105 && x <=121)))
+    {
         mvprintw(5, 5,"Errou!");
-     else if (y>= Hpredios[2] && (x>=37 && x <=53))
-        mvprintw(5, 5,"Errou!");
-     else if (y>= Hpredios[3] && (x>=54 && x <=70))
-        mvprintw(5, 5,"Errou!");
-     else if (y>= Hpredios[4] && (x>=71 && x <=87))
-        mvprintw(5, 5,"Errou!");
-     else if (y>= Hpredios[5] && (x>=88 && x <=104))
-        mvprintw(5, 5,"Errou!");
-     else if (y>= Hpredios[6] && (x>=105 && x <=121))
-        mvprintw(5, 5,"Errou!");
-    return 0;
+        return 0;
+    }
+
+    return 1;
 }
 
 int play(int nivel){
@@ -123,10 +119,12 @@ int play(int nivel){
         scrollok(predio, true);
         start_color();
         init_pair(1, COLOR_BLACK, COLOR_BLUE);
+        init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 
         int h, hmacaco1, hmacaco2;
         int Hpredios[8];
         int c = 0;
+        int ver;
         srand(time(NULL));
 
         for(int i = 0; i < 100; i++){
@@ -225,15 +223,18 @@ int play(int nivel){
                 double seno = sin(angRad); //calcular o sen com a função sin()
                 double cose = cos(angRad);
                 float tempo = fabs(((2*vel1n)*(cose))/g);
-
+                
 
                 for (float t=0; t < tempo+5; t += 0.1) {
                     int x = 11 + abs(vel1n) * (seno) * t; // x = abs(11 + vel1n * cose * t)
                     int y = (hmacaco1-2) - (abs(vel1n) * (cose) * t) + ((g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
-                    
+
+                    wattron(predio,COLOR_PAIR(2));                    
                     mvprintw(y,x, "Z");
+                    wattroff(predio,COLOR_PAIR(2));
                     usleep(100000);
                     refresh();
+                    
                     mvprintw(y,x, " ");
                     
 
@@ -246,9 +247,12 @@ int play(int nivel){
                         break;
                     } else if (y>= Hpredios[6] && (x>=122 && x <=127)){ //inicio do oitavo predio
                         mvprintw(5, 5,"Errou!");
-                        //break;
+                        break;
                     }else
-                        colisaoPredio (Hpredios, y, x);
+                        ver=colisaoPredio (Hpredios, y, x);
+
+                        if(ver==0)
+                            break;
                 }
 
                     refresh();
@@ -275,22 +279,22 @@ int play(int nivel){
                 curs_set(0);
                 refresh();
 
-                //Lançamentp
+                //Lançamento
                 float angRad2 = (ang2n*3.14)/180;
-                double seno2 = sin(angRad2); //calcular o sen com a função sin()
+                double seno2 = sin(angRad2);
                 double cose2 = cos(angRad2);
                 float tempo2 = fabs(((2*vel2n)*(cose2))/g);
 
 
                 for (float t=0; t < tempo2+5; t += 0.1) {
-
-                    int x2 = (126 - abs(vel2n) * seno2 * t); // x = abs(126 - vel2n * cose2 * t)
-                    int y2 = (hmacaco2-2) - (abs(vel2n) * (cose2) * t) + ((g*(t*t))/2); // y = (hmacaco2-1) - abs((vel2n * seno2 * t) + (g*(t*t))/2)
-
+                    int x2 = (126 - abs(vel2n) * seno2 * t); 
+                    int y2 = (hmacaco2-2) - (abs(vel2n) * (cose2) * t) + ((g*(t*t))/2); 
+                    
                     mvprintw(y2,x2, "Z");
-                    usleep(100000);
                     refresh();
+                    usleep(100000);
                     mvprintw(y2,x2, " ");   
+                    
 
                 //colisão
                     if ((y2 >= hmacaco1-1 && y2 <= hmacaco1-3) && (x2 >= 9 && x2 <= 11 )){
@@ -300,8 +304,10 @@ int play(int nivel){
                         mvprintw(5, 113,"Errou!");
                         break;
                     } else {
-                        colisaoPredio (Hpredios, y2, x2);
-                        //break;
+                        ver=colisaoPredio (Hpredios, y2, x2);
+
+                        if(ver==0)
+                            break;
                     }
 
                     refresh();
