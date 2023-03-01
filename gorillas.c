@@ -61,7 +61,7 @@ int ranking (){
     wrefresh(janela);
 
     mvwprintw(janela, 10, (xmax/2)-5, "RANKING DOS JOGADORES");
-
+    return 0;
 }
 
 int menu(void){
@@ -88,6 +88,7 @@ int menu(void){
 
     getch();
     endwin();
+    return 0;
 }
 
 int colisaoPredio (int Hpredios [], int y, int x){ //verificação se bateu no segundo ou nos proxs até o sétimo prédio.
@@ -103,6 +104,7 @@ int colisaoPredio (int Hpredios [], int y, int x){ //verificação se bateu no s
         mvprintw(5, 5,"Errou!");
      else if (y>= Hpredios[6] && (x>=105 && x <=121))
         mvprintw(5, 5,"Errou!");
+    return 0;
 }
 
 int play(int nivel){
@@ -220,18 +222,20 @@ int play(int nivel){
 
                 //Lançamentp
                 float angRad = (ang1n*3.14)/180;
-                //double seno = sin(angRad); calcular o sen com a função sin()
-                //double cose = cos(angRad);
-                float tempo = abs(((2*vel1n)*(-0.98))/g);
+                double seno = sin(angRad); //calcular o sen com a função sin()
+                double cose = cos(angRad);
+                float tempo = fabs(((2*vel1n)*(cose))/g);
 
 
-                for (float t=0; t < tempo ; t += 0.1) {
-                    int x = 11 + abs(vel1n) * (0.15) * t; // x = abs(11 + vel1n * cose * t)
-                    int y = (hmacaco1-2) - abs((vel1n * (-0.98) * t) + (g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
-
+                for (float t=0; t < tempo+5; t += 0.1) {
+                    int x = 11 + abs(vel1n) * (seno) * t; // x = abs(11 + vel1n * cose * t)
+                    int y = (hmacaco1-2) - (abs(vel1n) * (cose) * t) + ((g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
+                    
                     mvprintw(y,x, "Z");
-                    //sleep(5);
-                    //mvprintw(y,x, " ");
+                    usleep(100000);
+                    refresh();
+                    mvprintw(y,x, " ");
+                    
 
                 //colisão
                     if ((y >= hmacaco2-1 && y <= hmacaco2-3) && (x >= 128 && x <= 130 )){
@@ -273,19 +277,20 @@ int play(int nivel){
 
                 //Lançamentp
                 float angRad2 = (ang2n*3.14)/180;
-                //double seno2 = sin(angRad2); calcular o sen com a função sin()
-                //double cose2 = cos(angRad2);
-                float tempo2 = abs(((2*vel2n)*(-0.98))/g);
+                double seno2 = sin(angRad2); //calcular o sen com a função sin()
+                double cose2 = cos(angRad2);
+                float tempo2 = fabs(((2*vel2n)*(cose2))/g);
 
 
-                for (float t=0; t < tempo2 ; t += 0.1) {
+                for (float t=0; t < tempo2+5; t += 0.1) {
 
-                    int x2 = 126 - abs(vel2n) * (0.15) * t; // x = abs(126 - vel2n * cose2 * t)
-                    int y2 = (hmacaco2-2) - (abs(vel2n) * (-0.98) * t) + ((g*(t*t))/2); // y = (hmacaco2-1) - abs((vel2n * seno2 * t) + (g*(t*t))/2)
+                    int x2 = (126 - abs(vel2n) * seno2 * t); // x = abs(126 - vel2n * cose2 * t)
+                    int y2 = (hmacaco2-2) - (abs(vel2n) * (cose2) * t) + ((g*(t*t))/2); // y = (hmacaco2-1) - abs((vel2n * seno2 * t) + (g*(t*t))/2)
 
                     mvprintw(y2,x2, "Z");
-                    //sleep(5);
-                    //mvprintw(y2,x2, " ");
+                    usleep(100000);
+                    refresh();
+                    mvprintw(y2,x2, " ");   
 
                 //colisão
                     if ((y2 >= hmacaco1-1 && y2 <= hmacaco1-3) && (x2 >= 9 && x2 <= 11 )){
@@ -315,7 +320,7 @@ int play(int nivel){
 
 
         delwin(predio);
-
+    return 0;
 }
 int picklevel (void)
 {
@@ -337,7 +342,7 @@ int picklevel (void)
     else if (dificuldade[index] == dificuldade[2])
         ValorLevel = 15;
     play(ValorLevel);
-
+    return 0;
 }
 
 
