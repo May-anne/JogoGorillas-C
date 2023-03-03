@@ -226,8 +226,8 @@ int play(int nivel){
                 
 
                 for (float t=0; t < tempo+5; t += 0.1) {
-                    int x = 11 + abs(vel1n) * (seno) * t; // x = abs(11 + vel1n * cose * t)
-                    int y = (hmacaco1-2) - (abs(vel1n) * (cose) * t) + ((g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
+                    int x = 11 + abs(vel1n) * (cose) * t; // x = abs(11 + vel1n * cose * t)
+                    int y = (hmacaco1-2) - (abs(vel1n) * (seno) * t) + ((g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
 
                     wattron(predio,COLOR_PAIR(2));                    
                     mvprintw(y,x, "Z");
@@ -287,8 +287,8 @@ int play(int nivel){
 
 
                 for (float t=0; t < tempo2+5; t += 0.1) {
-                    int x2 = (126 - abs(vel2n) * seno2 * t); 
-                    int y2 = (hmacaco2-2) - (abs(vel2n) * (cose2) * t) + ((g*(t*t))/2); 
+                    int x2 = (126 - abs(vel2n) * cose2 * t); 
+                    int y2 = (hmacaco2-2) - (abs(vel2n) * (seno2) * t) + ((g*(t*t))/2); 
                     
                     mvprintw(y2,x2, "Z");
                     refresh();
