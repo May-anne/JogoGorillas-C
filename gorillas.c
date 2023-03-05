@@ -225,34 +225,38 @@ int play(int nivel){
                 float tempo = fabs(((2*vel1n)*(cose))/g);
                 
 
-                for (float t=0; t < tempo+5; t += 0.1) {
+                for (float t=0; t < tempo+10; t += 0.1) {
                     int x = 11 + abs(vel1n) * (cose) * t; // x = abs(11 + vel1n * cose * t)
                     int y = (hmacaco1-2) - (abs(vel1n) * (seno) * t) + ((g*(t*t))/2); // y = (hmacaco1-1) - abs((vel1n * seno * t) + (g*(t*t))/2)
 
-                    wattron(predio,COLOR_PAIR(2));                    
+                    wattron(janela,COLOR_PAIR(2));                    
                     mvprintw(y,x, "Z");
-                    wattroff(predio,COLOR_PAIR(2));
+                    wattroff(janela,COLOR_PAIR(2));
                     usleep(100000);
                     refresh();
                     
                     mvprintw(y,x, " ");
                     
 
-                //colisão
-                    if ((y >= hmacaco2-1 && y <= hmacaco2-3) && (x >= 128 && x <= 130 )){
+                //macaco 1 -> macaco 2
+                    if ((y <= hmacaco2-1 && y >= hmacaco2-3) && (x >= 128 && x <= 130 )){
                         mvprintw(5, 5,"Voce acertou!");
                         break;
-                    } else if (y >= hmacaco1 && (x >= 12 && x <= 19 )){ // predio do macaco 1
+                    } else if (y >= hmacaco1 && (x >= 12 && x <= 19 )){ // o próprio predio do macaco 1
                         mvprintw(5, 5,"Errou!");
                         break;
-                    } else if (y>= Hpredios[6] && (x>=122 && x <=127)){ //inicio do oitavo predio
+                    } else if (y>= Hpredios[7] && (x>=122 && x <=138)){ //inicio do oitavo predio
+                        mvprintw(5, 5,"Errou!");
+                        break; }
+                    else if(y == hmacaco1 && x == 12){
                         mvprintw(5, 5,"Errou!");
                         break;
-                    }else
+                    }
+                     else {
                         ver=colisaoPredio (Hpredios, y, x);
 
                         if(ver==0)
-                            break;
+                            break;}
                 }
 
                     refresh();
@@ -286,7 +290,7 @@ int play(int nivel){
                 float tempo2 = fabs(((2*vel2n)*(cose2))/g);
 
 
-                for (float t=0; t < tempo2+5; t += 0.1) {
+                for (float t=0; t < tempo2+10; t += 0.1) {
                     int x2 = (126 - abs(vel2n) * cose2 * t); 
                     int y2 = (hmacaco2-2) - (abs(vel2n) * (seno2) * t) + ((g*(t*t))/2); 
                     
@@ -296,12 +300,15 @@ int play(int nivel){
                     mvprintw(y2,x2, " ");   
                     
 
-                //colisão
-                    if ((y2 >= hmacaco1-1 && y2 <= hmacaco1-3) && (x2 >= 9 && x2 <= 11 )){
-                        mvprintw(5, 114,"Voce acertou!");
+                //macaco2 -> macaco1
+                    if ((y2 <= hmacaco1-1 && y2 >= hmacaco1-3) && (x2 >= 9 && x2 <= 12 )){
+                        mvprintw(5, 5,"Voce acertou!");
                         break;
-                    } else if (y2 >= hmacaco2 && (x2 >= 122 && x2 <= 127 )){ //predio do macaco 2
-                        mvprintw(5, 113,"Errou!");
+                    } else if ((y2 >= hmacaco2) && (x2 >= 122 && x2 <= 127 )){ //predio do macaco 2
+                        mvprintw(5, 5,"Errou!");
+                        break;
+                    } else if (y2>= Hpredios[0] && (x2>=3 && x2 <=19)){ //inicio do primeiro predio
+                        mvprintw(5, 5,"Errou!");
                         break;
                     } else {
                         ver=colisaoPredio (Hpredios, y2, x2);
