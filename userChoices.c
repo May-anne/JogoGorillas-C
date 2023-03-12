@@ -25,3 +25,13 @@ void pickLevel () {
     
     play(ValorLevel);
 }
+
+void keepPlaying() {
+    initscr();
+    clear();
+
+    WINDOW * janela = newwin(Y, X, 0, 0);
+    box(janela,0,0);
+    refresh();
+    wrefresh(janela);
+}

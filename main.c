@@ -9,12 +9,14 @@
 #include "global.h"
 
 int Hpredios[8];
+
 void pickLevel();
 void ranking();
 
 int main(void){
     char menu[3][10] = {"Playing", "Ranking", "Exit"};
     char titulo[] = {"GORILLAS"};
+    int index = 0;
 
     initscr();
     noecho();
@@ -25,7 +27,7 @@ int main(void){
     refresh();
     wrefresh(janela);
 
-    int index = changeColor(menu, titulo);
+    index = changeColor(menu, titulo);
 
     if (menu[index] == menu[0])
         pickLevel();

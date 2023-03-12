@@ -6,6 +6,7 @@
     int changeColor(char x[3][10], char y[]);
     void ranking(void);
     void pickLevel (void);
+    void keepPlaying(void);
     int play(int nivel);
     void buildMap(int nivel);
     int colisaoPredio (int Hpredios [], int y, int x);

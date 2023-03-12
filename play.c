@@ -4,6 +4,8 @@
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
+
 #include "global.h"
 
 extern int Hpredios[8];
@@ -25,15 +27,13 @@ int play(int nivel) {
 
     buildMap(nivel);
 
-    char jogador1 [10];
-    char jogador2 [10];
+    char jogador1[] = {};
+    char jogador2[] = {};
     int ang1n,ang2n,vel1n,vel2n;
     char ang1[5],ang2[5],vel1[5],vel2[5];
     int vez = 0;
     int controle;
     int g = 10;
-    
-    char info[2][2];
 
     while (true)
     {
@@ -42,21 +42,22 @@ int play(int nivel) {
         if(vez%2==0){ //Vez jogador 1
             if(vez==0){
 
-                if(jogador1[0] == '\0'){ //Não funciona, por alguma razão
+                if(sizeof(jogador1) == 0){ //Informações dos jogadores (nome)
                     curs_set(1);
                     mvprintw(1, 1,"Nome Jogador 1: ");
                     getstr(jogador1);
-                    
+
                 } else {
-                    mvprintw(1,17,"%s",jogador1);
+                    mvprintw(1,1,"Nome Jogador 1: %s",jogador1);
                 }
 
-                if(jogador2[0] == '\0'){
+                if(sizeof(jogador2) == 0){
                     curs_set(1);
                     mvprintw(1,110,"Nome Jogador 2: ");
                     getstr(jogador2);
+
                 } else {
-                    mvprintw(1,126,"%s",jogador2);
+                    mvprintw(1,110,"Nome Jogador 2: %s",jogador2);
                 }
                 refresh();
 
