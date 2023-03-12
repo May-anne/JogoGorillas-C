@@ -7,6 +7,5 @@
     int play(int nivel);
     void buildMapa(int nivel);
     int colisaoPredio (int Hpredios [], int y, int x);
-    extern int Hpredios[8];
 
 #endif
