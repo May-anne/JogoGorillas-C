@@ -5,7 +5,7 @@
 #include "global.h"
 extern int Hpredios[8];
 
-void buildMapa(int nivel) {
+void buildMap(int nivel) {
     WINDOW * predio;
     predio = newpad(31,155);
 

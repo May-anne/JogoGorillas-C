@@ -1,22 +1,20 @@
 #include <curses.h>
 #include "global.h"
 
-int picklevel () {
+void pickLevel () {
 
     char dificuldade[3][10] = {"Facil", "Normal", "Dificil"};
     int play(int nivel);
     char titulo[] = {"ESCOLHA UMA DIFICULDADE"};
-    int xmax, ymax, index;
+    int index;
     int ValorLevel = 0;
-    
-    getmaxyx(stdscr, ymax, xmax);
 
-    WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
+    WINDOW * janela = newwin(Y, X, 0, 0);
     box(janela,0,0);
     refresh();
     wrefresh(janela);
 
-    index = mudarCor(dificuldade, titulo);
+    index = changeColor(dificuldade, titulo);
 
     if (dificuldade[index] == dificuldade[0])
         ValorLevel = 5;
@@ -26,5 +24,4 @@ int picklevel () {
         ValorLevel = 15;
     
     play(ValorLevel);
-    return 0;
 }

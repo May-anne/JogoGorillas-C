@@ -1,28 +1,29 @@
 #include <curses.h>
+#include <string.h>
 #include "global.h"
 
-int mudarCor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
+int changeColor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
 {
     int index = 0;
-    int xmax, ymax, escolha;
-    getmaxyx(stdscr, ymax, xmax);
+    int escolha = 0;
+    int tamanho = strlen(y);
 
-    WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
+    WINDOW * janela = newwin(Y, X, 0, 0);
     box(janela,0,0);
     refresh();
     wrefresh(janela);
 
     keypad(janela, true);
-    mvwprintw(janela, 10, (xmax/2)-5, "%s", y);
+    mvwprintw(janela, 10, (X - tamanho)/2, "%s", y);
 
     while(true) {
         for(int i=0; i < 3; i++) {
             if (i == index) {
                 wattron(janela, A_REVERSE);
-                mvwprintw(janela, i+15, (xmax/2)-4, "%s", x[i]);
+                mvwprintw(janela, i+15, (X-strlen(x[i]))/2, "%s", x[i]);
                 wattroff(janela, A_REVERSE);
             } else {
-                mvwprintw(janela, i+15, (xmax/2)-4, "%s", x[i]);
+                mvwprintw(janela, i+15, (X-strlen(x[i]))/2, "%s", x[i]);
             }
         }
         escolha = wgetch(janela);
