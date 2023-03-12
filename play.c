@@ -1,112 +1,18 @@
-#include <stdio.h>
 #include <curses.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <math.h>
+#include <time.h>
 #include <unistd.h>
 
-int xmax, ymax;
-int escolha, ValorLevel;
+#include "global.h"
 
-int mudarCor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
-{
-    int index = 0;
-    getmaxyx(stdscr,ymax,xmax);
-    WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
-    box(janela,0,0);
-    refresh();
-    wrefresh(janela);
+int play(int nivel) {
 
-    keypad(janela, true);
-    mvwprintw(janela, 10, (xmax/2)-5, "%s", y);
-
-    while(true) {
-        for(int i=0; i < 3; i++) {
-            if (i == index) {
-                wattron(janela, A_REVERSE);
-                mvwprintw(janela, i+15, (xmax/2)-4, "%s", x[i]);
-                wattroff(janela, A_REVERSE);
-            } else {
-                mvwprintw(janela, i+15, (xmax/2)-4, "%s", x[i]);
-            }
-        }
-        escolha = wgetch(janela);
-
-        switch(escolha) {
-            case KEY_UP:
-                index--;
-                if(index == -1)
-                    index = 2;
-                break;
-            case KEY_DOWN:
-                index++;
-                if(index == 3)
-                    index = 0;
-                break;
-            default:
-                break;
-        }
-        if(escolha == 10){
-            break;
-        }
-    }
-   return index;
-}
-
-int ranking (){
-
-    WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
-    box(janela,0,0);
-    refresh();
-    wrefresh(janela);
-
-    mvwprintw(janela, 10, (xmax/2)-5, "RANKING DOS JOGADORES");
-    return 0;
-}
-
-int menu(void){
-    char menu[3][10] = {"Playing", "Ranking", "Exit"};
-    char titulo[] = {"GORILLAS"};
-    int picklevel (void);
-
-    initscr();
-    noecho();
-    curs_set(0);
-
-    WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
-    box(janela,0,0);
-    refresh();
-    wrefresh(janela);
-    int index = mudarCor(menu, titulo);
-
-    if (menu[index] == menu[0])
-        picklevel();
-    else if(menu[index] == menu[1])
-        ranking();
-    else if (menu[index] == menu[2])
-        endwin();
-
-    getch();
-    endwin();
-    return 0;
-}
-
-int colisaoPredio (int Hpredios [], int y, int x){ //verificação se bateu no segundo ou nos proxs até o sétimo prédio.
-    if ((y>= Hpredios[1] && (x>=20 && x <=36))||(y>= Hpredios[2] && (x>=37 && x <=53))||(y>= Hpredios[3] && (x>=54 && x <=70))||
-    (y>= Hpredios[4] && (x>=71 && x <=87))||(y>= Hpredios[5] && (x>=88 && x <=104))|| (y>= Hpredios[5] && (x>=88 && x <=104))||
-    (y>= Hpredios[6] && (x>=105 && x <=121)))
-    {
-        mvprintw(5, 5,"Errou!");
-        return 0;
-    }
-
-    return 1;
-}
-
-int play(int nivel){
         initscr();
         clear();
         refresh();
+        int colisaoPredio(int Hpredios [], int y, int x);
 
         WINDOW * janela = newwin(32, 140, 0, 0);
         box(janela,0,0);
@@ -334,33 +240,4 @@ int play(int nivel){
 
         delwin(predio);
     return 0;
-}
-int picklevel (void)
-{
-    char dificuldade[3][10] = {"Facil", "Normal", "Dificil"};
-    char titulo[] = {"ESCOLHA UMA DIFICULDADE"};
-
-    WINDOW * janela = newwin((ymax-5),(xmax-5),2,2);
-    box(janela,0,0);
-    refresh();
-    wrefresh(janela);
-
-
-    int index = mudarCor(dificuldade, titulo);
-
-    if (dificuldade[index] == dificuldade[0])
-        ValorLevel = 5;
-    else if (dificuldade[index] == dificuldade[1])
-        ValorLevel = 10;
-    else if (dificuldade[index] == dificuldade[2])
-        ValorLevel = 15;
-    play(ValorLevel);
-    return 0;
-}
-
-
-
-int main(void){
-
-    menu();
 }
