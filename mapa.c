@@ -61,6 +61,10 @@ int colisaoPredio (int Hpredios [], int y, int x){ //verificação se bateu no s
     {
         mvprintw(5, 5,"Errou!");
         return 0;
+
+    } else if (x<2 || x>138 || y > 30){ //Ultrapassou os limites do mapa
+        mvprintw(5, 5,"Errou!");
+        return 0;
     }
 
     return 1;

@@ -26,7 +26,7 @@ int play(int nivel) {
     buildMapa(nivel);
 
     char jogador1[10];
-    char jogador2 [20];
+    char jogador2 [10];
     int ang1n,ang2n,vel1n,vel2n;
     char ang1[5],ang2[5],vel1[5],vel2[5];
     int vez = 0;
@@ -43,15 +43,21 @@ int play(int nivel) {
 
                 //Coleta nomes dos jogadores e armazena nos arrays
                 curs_set(1);//cursor visivel
-                mvprintw(1,1,"Nome Jogador 1: ");
-                getstr(jogador1);
-                mvprintw(1,110,"Nome Jogador 2: ");
-                getstr(jogador2);
 
                 //Imprime nomes na tela
-                mvprintw(1,17,"%s",jogador1);
-                mvprintw(1,126,"%s",jogador2);
+                if(jogador1[0] == '\0'){
+                    mvprintw(1,1,"Nome Jogador 1: ");
+                    getstr(jogador1);
+                } else {
+                    mvprintw(1,17,"%s",jogador1);
+                }
 
+                if(jogador2[0] == '\0'){
+                    mvprintw(1,110,"Nome Jogador 2: ");
+                    getstr(jogador2);
+                } else {
+                    mvprintw(1,126,"%s",jogador2);
+                }
                 refresh();
 
             }
@@ -170,7 +176,7 @@ int play(int nivel) {
                     mvprintw(5, 5,"Errou!");
                     break;
                 } else {
-                    ver=colisaoPredio (Hpredios, y2, x2);
+                    ver = colisaoPredio(Hpredios, y2, x2);
 
                     if(ver==0)
                         break;
@@ -189,8 +195,6 @@ int play(int nivel) {
 
         vez++;
     }
-
-
     //delwin(predio);
 return 0;
 }
