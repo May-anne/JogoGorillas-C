@@ -1,10 +1,10 @@
 #include <curses.h>
 #include "global.h"
 
-void picklevel () {
-    int play(int nivel);
+int picklevel () {
 
     char dificuldade[3][10] = {"Facil", "Normal", "Dificil"};
+    int play(int nivel);
     char titulo[] = {"ESCOLHA UMA DIFICULDADE"};
     int xmax, ymax, index;
     int ValorLevel = 0;
@@ -24,5 +24,7 @@ void picklevel () {
         ValorLevel = 10;
     else if (dificuldade[index] == dificuldade[2])
         ValorLevel = 15;
+    
     play(ValorLevel);
+    return 0;
 }
