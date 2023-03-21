@@ -35,4 +35,19 @@ void keepPlaying() {
     box(janela,0,0);
     refresh();
     wrefresh(janela);
+
+    char options[3][10] = {"Yes", "No"};
+    char titulo[] = {"Do you want to keep playing?"};
+    int index = 0;
+
+    index = changeColor(options, titulo);
+
+    if (options[index] == options[0])
+        pickLevel();
+    else if(options[index] == options[1])
+        ranking();
+
+    getch();
+    endwin();
+
 }

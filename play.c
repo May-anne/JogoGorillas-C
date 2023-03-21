@@ -9,16 +9,23 @@
 #include "global.h"
 
 extern int Hpredios[8];
-extern char info[10][20];
+
+typedef struct{
+    char* nome;
+    char angulo[5], velocidade[5];
+    int angtoInt, veltoInt;
+    } Play;
+Play* jogador1, jogador2;
 
 int play(int nivel) {
     initscr();
     clear();
     refresh();
-
-    void buildMap(int nivel);
+    free(jogador1);
 
     int ver;
+    int vez = 0;
+    int controle;
 
     WINDOW * janela = newwin(Y, X, 0, 0);
     box(janela,0,0);
@@ -27,12 +34,15 @@ int play(int nivel) {
 
     buildMap(nivel); //Chamada de função para construir mapa
 
-    char jogador1[] = {"Mayanne"};
-    char jogador2[] = {};
-    char ang1[5], ang2[5], vel1[5], vel2[5];
-    int ang1toInt, ang2toInt,vel1toInt,vel2toInt;
-    int vez = 0;
-    int controle;
+    jogador1 = malloc(10*sizeof(Play));
+
+    if(jogador1->nome == NULL){
+        jogador1->nome = (char *) malloc(sizeof(char*));
+        mvprintw(1, 1,"Nome Jogador 1: ");
+        getstr(jogador1[0].nome);
+    }else {
+        mvprintw(1,1,"Nome Jogador 1: %s",jogador1[0].nome);
+    }
 
     while (true)
     {
@@ -41,16 +51,14 @@ int play(int nivel) {
 
         if(vez%2==0) { //Vez jogador 1
 
-                if(sizeof(jogador1) == 0){ //Informações dos jogadores (nome)
+                /*if(jogador1.nome == NULL){ //Informações dos jogadores (nome)
                     curs_set(1);
                     mvprintw(1, 1,"Nome Jogador 1: ");
-                    getstr(jogador1);
-                    strcpy(info[0], jogador1);
+                    getstr(jogador1.nome);
 
                 } else {
-                    strcpy(info[0], jogador1);
-                    mvprintw(1,1,"Nome Jogador 1: %s",jogador1);
-                }
+                    mvprintw(1,1,"Nome Jogador 1: %s",jogador1.nome);
+                }*/
 
                 refresh();
 
@@ -58,14 +66,14 @@ int play(int nivel) {
             //Imprime mensagem de angulo e velocidade na tela e coleta string escrita e imprime na tela
             mvprintw(2,1,"Angulo:");
             refresh();
-            getstr(ang1);
-            mvprintw(2,8,"%s",ang1);
+            getstr(jogador1[1].angulo);
+            mvprintw(2,8,"%s", jogador1[1].angulo);
             refresh();
 
             mvprintw(3,1,"Velocidade:");
             refresh();
-            getstr(vel1);
-            mvprintw(3,12,"%s",vel1);
+            getstr(jogador1[2].velocidade);
+            mvprintw(3,12,"%s",jogador1[2].velocidade);
             refresh();
 
             mvprintw(2,1,"                                                                    ");
@@ -74,40 +82,35 @@ int play(int nivel) {
             refresh();
 
             //Conversão char -> int
-            ang1toInt = atoi(ang1);
-            vel1toInt = atoi(vel1);
-            throwBanana(ang1toInt, vel1toInt, 1); //Lançamento da Banana
+            jogador1[3].angtoInt = atoi(jogador1[1].angulo);
+            jogador1[3].veltoInt = atoi(jogador1[2].velocidade);
+            throwBanana(jogador1[3].angtoInt, jogador1[3].veltoInt, 1); //Lançamento da Banana
             vez++;
 
             refresh();
 
         } else { //Vez jogador 2
-            if(sizeof(jogador2) == 0){
+            if(strlen(jogador2.nome) == 0){
                 curs_set(1);
                 mvprintw(1,110,"Nome Jogador 2: ");
-                getstr(jogador2);
-
-                strcpy(info[1], jogador2);
+                getstr(jogador2.nome);
 
             } else {
-                strcpy(info[1], jogador2);
-                mvprintw(1,110,"Nome Jogador 2: %s",jogador2);
+                mvprintw(1,110,"Nome Jogador 2: %s",jogador2.nome);
             }
 
             curs_set(1);
             mvprintw(2,110,"Angulo:");
             refresh();
-            getstr(ang2);
-            mvprintw(2,117,"%s",ang2);
+            getstr(jogador2.angulo);
+            mvprintw(2,117,"%s",jogador2.angulo);
             refresh();
-            ang2toInt = atoi(ang2);
 
             mvprintw(3,110,"Velocidade:");
             refresh();
-            getstr(vel2);
-            mvprintw(3,121,"%s",vel2);
+            getstr(jogador2.velocidade);
+            mvprintw(3,121,"%s",jogador2.velocidade);
             refresh();
-            vel2toInt = atoi(vel2);
 
             mvprintw(2,110,"                         ");
             mvprintw(3,110,"                         ");
@@ -115,14 +118,15 @@ int play(int nivel) {
             curs_set(0);
             refresh();
 
-            throwBanana(ang2toInt, vel2toInt, 2);
+            jogador2.angtoInt = atoi(jogador2.angulo); //Conversão char -> int
+            jogador2.veltoInt = atoi(jogador2.velocidade);
+            throwBanana(jogador2.angtoInt, jogador2.veltoInt, 2);
             vez++;
 
             refresh();
 
             controle = getch();
             noecho();
-            
             if(controle=='q'){
                 break;
             }
