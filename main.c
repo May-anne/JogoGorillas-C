@@ -9,6 +9,7 @@
 #include "global.h"
 
 int Hpredios[8];
+char info[10][20];
 
 void pickLevel();
 void ranking();

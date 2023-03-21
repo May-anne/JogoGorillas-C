@@ -9,6 +9,6 @@
     void keepPlaying(void);
     int play(int nivel);
     void buildMap(int nivel);
-    int colisaoPredio (int Hpredios [], int y, int x);
+    int throwBanana(int ang, int vel, int jogador);
 
 #endif

@@ -1,6 +1,7 @@
 #include <curses.h>
 #include "global.h"
 
+
 void pickLevel () {
 
     char dificuldade[3][10] = {"Facil", "Normal", "Dificil"};

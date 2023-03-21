@@ -54,18 +54,3 @@ void buildMap(int nivel) {
 
 }
 
-int colisaoPredio (int Hpredios [], int y, int x){ //verificação se bateu no segundo ou nos proxs até o sétimo prédio.
-    if ((y>= Hpredios[1] && (x>=20 && x <=36))||(y>= Hpredios[2] && (x>=37 && x <=53))||(y>= Hpredios[3] && (x>=54 && x <=70))||
-    (y>= Hpredios[4] && (x>=71 && x <=87))||(y>= Hpredios[5] && (x>=88 && x <=104))|| (y>= Hpredios[5] && (x>=88 && x <=104))||
-    (y>= Hpredios[6] && (x>=105 && x <=121)))
-    {
-        mvprintw(5, 5,"Errou!");
-        return 0;
-
-    } else if (x<2 || x>138 || y > 30){ //Ultrapassou os limites do mapa
-        mvprintw(5, 5,"Errou!");
-        return 0;
-    }
-
-    return 1;
-}

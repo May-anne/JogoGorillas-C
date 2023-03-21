@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include "global.h"
 
+extern char info[10][20];
+
 void ranking () {
     char tituloRanking[22] = {"RANKING DOS JOGADORES"};
     int tamanho = strlen(tituloRanking);
@@ -19,4 +21,5 @@ void ranking () {
     wrefresh(janela);
 
     mvprintw(10, (X-tamanho)/2, "%s", tituloRanking);
+    mvprintw(10, 15, "O seu nome eh %s", info[0]);
 }
