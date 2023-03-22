@@ -9,7 +9,7 @@
 #include "global.h"
 
 extern int Hpredios[8];
-Play *jogador1, *jogador2;
+extern Play *jogador1, *jogador2;
 extern char *p1, *p2;
 
 int play(int nivel) {
@@ -31,11 +31,8 @@ int play(int nivel) {
 
     buildMap(nivel); //Chamada de função para construir mapa
 
-    jogador1 = calloc(1, sizeof(Play));
-    jogador2 = calloc(1, sizeof(Play));
-
-    jogador1->nome = "Oii";
     p1 = jogador1->nome;
+    p2 = jogador2->nome;
 
     if(jogador1->nome == NULL){
     jogador1->nome = malloc(20);
@@ -43,7 +40,7 @@ int play(int nivel) {
     getstr(jogador1->nome);
 
     } else {
-    mvprintw(1,1,"Nome Jogador 1: %s", p1);
+    mvprintw(1,1,"Nome Jogador 1: %s", jogador1->nome);
     }
 
     if(jogador2->nome == NULL){
@@ -54,7 +51,7 @@ int play(int nivel) {
     } else {
         mvprintw(1,110,"Nome Jogador 2: %s", jogador2->nome);
     }
-    p2 = jogador2->nome;
+    
 
     while (true)
     {

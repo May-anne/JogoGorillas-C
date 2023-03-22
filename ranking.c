@@ -21,5 +21,5 @@ void ranking () {
     wrefresh(janela);
 
     mvprintw(10, (X-tamanho)/2, "%s", tituloRanking);
-    mvprintw(10, 15, "O seu nome eh %s", p1);
+    mvprintw(15, (X-tamanho)/2, "Jogador 1: %s", p1);
 }
