@@ -47,7 +47,12 @@ int play(int nivel) {
     } else {
         mvprintw(1,110,"Nome Jogador 2: %s", jogador2->nome);
     }
+                
+    mvprintw(2,1, "Placar: %d", jogador1->placar);
+    refresh();
     
+    mvprintw(2, 110, "Placar: %d", jogador2->placar);
+    refresh();
 
     while (true)
     {
@@ -60,25 +65,26 @@ int play(int nivel) {
 
             //Imprime mensagem de angulo e velocidade na tela e coleta string escrita e imprime na tela
             escolha_1:
-                mvprintw(2,1,"Angulo:");
+                mvprintw(3,1,"Angulo:");
                 refresh();
                 getstr(jogador1->angulo);
-                mvprintw(2,8,"%s", jogador1->angulo);
+                mvprintw(3,8,"%s", jogador1->angulo);
                 refresh();
 
-                mvprintw(3,1,"Velocidade:");
+                mvprintw(4,1,"Velocidade:");
                 refresh();
                 getstr(jogador1->velocidade);
-                mvprintw(3,12,"%s",jogador2->velocidade);
+                mvprintw(4,12,"%s",jogador2->velocidade);
                 refresh();
 
-                mvprintw(2,1,"                                                                    ");
-                mvprintw(3,1,"                                                                    ");
+                mvprintw(3,1,"                               ");
+                mvprintw(4,1,"                               ");
+                mvprintw(Y/2, X/2, "                         ");
                 curs_set(0);
                 refresh();
-                
+
             if((strlen(jogador1->velocidade)==0)||(strlen(jogador1->angulo)==0))
-                goto escolha_1; //filtro de escolha do joagador
+            goto escolha_1; //filtro de escolha do joagador
 
             //Conversão char -> int
             jogador1->angtoInt = atoi(jogador1->angulo);
@@ -98,30 +104,30 @@ int play(int nivel) {
             refresh();
 
             escolha_2:
-                mvprintw(2,110,"Angulo:");
+                mvprintw(3,110,"Angulo:");
                 refresh();
                 getstr(jogador2->angulo);
-                mvprintw(2,117,"%s", jogador2->angulo);
+                mvprintw(3,117,"%s", jogador2->angulo);
                 refresh();
 
-                mvprintw(3,110,"Velocidade:");
+                mvprintw(4,110,"Velocidade:");
                 refresh();
                 getstr(jogador2->velocidade);
-                mvprintw(3,121,"%s", jogador2->velocidade);
+                mvprintw(4,121,"%s", jogador2->velocidade);
                 refresh();
 
-                mvprintw(2,110,"                         ");
                 mvprintw(3,110,"                         ");
-
+                mvprintw(4,110,"                         ");
+                mvprintw(Y/2, X/2,"                         ");
 
                 curs_set(0);
                 refresh();
+                
             if((strlen(jogador2->velocidade)==0)||(strlen(jogador2->angulo)==0))
                 goto escolha_2;
 
             jogador2->angtoInt = atoi(jogador2->angulo); //Conversão char -> int
             jogador2->veltoInt = atoi(jogador2->velocidade);
-
             throwBanana(jogador2->angtoInt, jogador2->veltoInt, 2);
             vez++;
 
@@ -137,4 +143,3 @@ int play(int nivel) {
     }
     return 0;
 }
-

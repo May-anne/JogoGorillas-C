@@ -15,8 +15,7 @@
     char *nome;
     char angulo[5];
     char velocidade[5];
-    int angtoInt;
-    int veltoInt;
+    int angtoInt, veltoInt, placar;
     } Play;
 
 #endif

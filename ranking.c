@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "global.h"
 
-extern char *p1, *p2;
+extern Play *jogador1, *jogador2;
 
 void ranking () {
     char tituloRanking[22] = {"RANKING DOS JOGADORES"};
@@ -21,5 +21,10 @@ void ranking () {
     wrefresh(janela);
 
     mvprintw(10, (X-tamanho)/2, "%s", tituloRanking);
-    mvprintw(15, (X-tamanho)/2, "Jogador 1: %s", p1);
+    mvprintw(15, (X-tamanho)/2 - 3, "Jogador 1: %s\tPlacar: %d", jogador1->nome, jogador1->placar);
+    mvprintw(17, (X-tamanho)/2  - 3, "Jogador 1: %s\tPlacar: %d", jogador2->nome, jogador2->placar);
+
+    getch();
+    endwin();
+    exit(0);
 }

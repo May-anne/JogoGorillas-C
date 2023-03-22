@@ -7,7 +7,7 @@
 #include "global.h"
 
 extern int Hpredios[8];
-int placar1, placar2;
+extern Play *jogador1, *jogador2;
 
 int throwBanana(int ang, int vel, int jogador) {
     float angRad, tempo;
@@ -38,21 +38,23 @@ int throwBanana(int ang, int vel, int jogador) {
 
      if(jogador == 1){ //Colisões específicas do jogador 1
         if ((y <= Hpredios[7]-1 && y >= Hpredios[7]-3) && (x >= 128 && x <= 130 )){
-            mvprintw(5, 5, "Voce acertou!");
+            mvprintw(Y/2, X/2, "Voce acertou!");
+            jogador1->placar++;
             keepPlaying();
             break;
         } else if(y>= Hpredios[7] && (x>=122 && x <=138)) {
-            mvprintw(5, 5,"Errou!");
+            mvprintw(Y/2, X/2,"Errou!");
             break;
         }
 
         } else if(jogador == 2){ //Colisões específicas do jogador 2
         if (y >= Hpredios[0] && (x >= 3 && x <= 19)) {
-            mvprintw(5, 5,"Errou!");
+            mvprintw(Y/2, Y/2,"Errou!");
             break;
         }
         else if ((y <= Hpredios[0]-1 && y >= Hpredios[0]-3) && (x >= 9 && x <= 12 )){
-            mvprintw(5, 5,"Voce acertou!");
+            mvprintw(Y/2, Y/2,"Voce acertou!");
+            jogador2->placar++;
             keepPlaying();
             break;
         }
@@ -62,11 +64,11 @@ int throwBanana(int ang, int vel, int jogador) {
     (y>= Hpredios[3] && (x>=54 && x <=70))|| (y>= Hpredios[4] && (x>=71 && x <=87))||(y>= Hpredios[5] && (x>=88 && x <=104))|| 
     (y>= Hpredios[5] && (x>=88 && x <=104))|| (y>= Hpredios[6] && (x>=105 && x <=121)))
     {
-        mvprintw(5, 5,"Errou!");
+        mvprintw(Y/2, X/2,"Errou!");
         break;
 
     } else if (x<2 || x>138 || y > 30){ //Ultrapassou os limites do mapa
-        mvprintw(5, 5,"Errou!");
+        mvprintw(Y/2, X/2,"Errou!");
         break;
         }
     }
