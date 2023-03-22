@@ -37,7 +37,7 @@ int throwBanana(int ang, int vel, int jogador) {
         mvprintw(y, x, " ");
 
      if(jogador == 1){ //Colisões específicas do jogador 1
-        if ((y <= Hpredios[7]-1 && y >= Hpredios[7]-3) && (x >= 128 && x <= 130 )){
+        if ((y <= Hpredios[7]-2 && y >= Hpredios[7]-4) && (x >= 126 && x <= 130 )){
             mvprintw(Y/2, X/2, "Voce acertou!");
             jogador1->placar++;
             refresh();
@@ -51,11 +51,11 @@ int throwBanana(int ang, int vel, int jogador) {
 
         } else if(jogador == 2){ //Colisões específicas do jogador 2
         if (y >= Hpredios[0] && (x >= 3 && x <= 19)) {
-            mvprintw(Y/2, Y/2,"Errou!");
+            mvprintw(Y/2, X/2,"Errou!");
             break;
         }
-        else if ((y <= Hpredios[0]-1 && y >= Hpredios[0]-3) && (x >= 9 && x <= 12 )){
-            mvprintw(Y/2, Y/2,"Voce acertou!");
+        else if ((y <= Hpredios[0]-2 && y >= Hpredios[0]-4) && (x >= 8 && x <= 12 )){
+            mvprintw(Y/2, X/2,"Voce acertou!");
             jogador2->placar++;
             refresh();
             usleep(2000000);
