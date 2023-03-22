@@ -9,6 +9,8 @@
 #include "global.h"
 
 extern int Hpredios[8];
+Play *jogador1, *jogador2;
+extern char *p1, *p2;
 
 int play(int nivel) {
     initscr();
@@ -29,16 +31,19 @@ int play(int nivel) {
 
     buildMap(nivel); //Chamada de função para construir mapa
 
-    Play *jogador1 = calloc(1, sizeof(Play));
-    Play *jogador2 = calloc(1, sizeof(Play));
+    jogador1 = calloc(1, sizeof(Play));
+    jogador2 = calloc(1, sizeof(Play));
+
+    jogador1->nome = "Oii";
+    p1 = jogador1->nome;
 
     if(jogador1->nome == NULL){
     jogador1->nome = malloc(20);
     mvprintw(1, 1,"Nome Jogador 1: ");
     getstr(jogador1->nome);
-    
+
     } else {
-    mvprintw(1,1,"Nome Jogador 1: %s", jogador1->nome);
+    mvprintw(1,1,"Nome Jogador 1: %s", p1);
     }
 
     if(jogador2->nome == NULL){
@@ -47,8 +52,9 @@ int play(int nivel) {
         getstr(jogador2->nome);
 
     } else {
-        mvprintw(1,110,"Nome Jogador 2: %s", jogador2->nome );
+        mvprintw(1,110,"Nome Jogador 2: %s", jogador2->nome);
     }
+    p2 = jogador2->nome;
 
     while (true)
     {
@@ -82,7 +88,12 @@ int play(int nivel) {
             jogador1->veltoInt = atoi(jogador1->velocidade);
             throwBanana(jogador1->angtoInt, jogador1->veltoInt, 1); //Lançamento da Banana
             vez++;
-
+            
+            controle = getch();
+            noecho();
+            if(controle=='q'){
+                break;
+            }
             refresh();
 
         } else { //Vez jogador 2
@@ -120,8 +131,7 @@ int play(int nivel) {
                 break;
             }
 
-    }
-    //delwin(predio);
+        }
     }
     return 0;
 }
