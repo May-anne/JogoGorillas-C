@@ -22,7 +22,7 @@ void ranking () {
 
     mvprintw(10, (X-tamanho)/2, "%s", tituloRanking);
     mvprintw(15, (X-tamanho)/2 - 3, "Jogador 1: %s\tPlacar: %d", jogador1->nome, jogador1->placar);
-    mvprintw(17, (X-tamanho)/2  - 3, "Jogador 1: %s\tPlacar: %d", jogador2->nome, jogador2->placar);
+    mvprintw(17, (X-tamanho)/2  - 3, "Jogador 2: %s\tPlacar: %d", jogador2->nome, jogador2->placar);
 
     getch();
     endwin();

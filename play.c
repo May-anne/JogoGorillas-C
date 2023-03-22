@@ -79,7 +79,7 @@ int play(int nivel) {
 
                 mvprintw(3,1,"                               ");
                 mvprintw(4,1,"                               ");
-                mvprintw(Y/2, X/2, "                         ");
+                mvprintw(Y/2-15, X/2-2, "                         ");
                 curs_set(0);
                 refresh();
 
@@ -118,7 +118,7 @@ int play(int nivel) {
 
                 mvprintw(3,110,"                         ");
                 mvprintw(4,110,"                         ");
-                mvprintw(Y/2, X/2,"                         ");
+                mvprintw(Y/2-15, X/2-2,"                         ");
 
                 curs_set(0);
                 refresh();

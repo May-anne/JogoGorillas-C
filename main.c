@@ -16,7 +16,7 @@ void pickLevel();
 void ranking();
 
 int main(void){
-    char menu[3][10] = {"Playing", "Ranking", "Exit"};
+    char menu[3][10] = {"Jogar", "Ranking", "Sair"};
     char titulo[] = {"GORILLAS"};
     int index = 0;
 
