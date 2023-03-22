@@ -40,6 +40,8 @@ int throwBanana(int ang, int vel, int jogador) {
         if ((y <= Hpredios[7]-1 && y >= Hpredios[7]-3) && (x >= 128 && x <= 130 )){
             mvprintw(Y/2, X/2, "Voce acertou!");
             jogador1->placar++;
+            refresh();
+            usleep(2000000);
             keepPlaying();
             break;
         } else if(y>= Hpredios[7] && (x>=122 && x <=138)) {
@@ -55,6 +57,8 @@ int throwBanana(int ang, int vel, int jogador) {
         else if ((y <= Hpredios[0]-1 && y >= Hpredios[0]-3) && (x >= 9 && x <= 12 )){
             mvprintw(Y/2, Y/2,"Voce acertou!");
             jogador2->placar++;
+            refresh();
+            usleep(2000000);
             keepPlaying();
             break;
         }
