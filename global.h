@@ -11,4 +11,12 @@
     void buildMap(int nivel);
     int throwBanana(int ang, int vel, int jogador);
 
+    typedef struct{
+    char *nome;
+    char angulo[5];
+    char velocidade[5];
+    int angtoInt;
+    int veltoInt;
+    } Play;
+
 #endif

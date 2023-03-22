@@ -10,14 +10,6 @@
 
 extern int Hpredios[8];
 
-typedef struct{
-    char *nome;
-    char angulo[5];
-    char velocidade[5];
-    int angtoInt;
-    int veltoInt;
-    } Play;
-
 int play(int nivel) {
     initscr();
     clear();
@@ -31,24 +23,26 @@ int play(int nivel) {
     box(janela,0,0);
     refresh();
     wrefresh(janela);
+
     curs_set(1);
+    echo();
 
     buildMap(nivel); //Chamada de função para construir mapa
 
-    Play *jogador1 = malloc(sizeof(Play) * 1);
-    Play *jogador2 = malloc(sizeof(Play) * 1);
+    Play *jogador1 = calloc(1, sizeof(Play));
+    Play *jogador2 = calloc(1, sizeof(Play));
 
+    if(jogador1->nome == NULL){
     jogador1->nome = malloc(20);
-    jogador2->nome  = malloc(20);
-
-        //jogador1->nome = malloc(20);
-        mvprintw(1, 1,"Nome Jogador 1: ");
-        getstr(jogador1->nome);
-        mvprintw(1,1,"Nome Jogador 1: %s", jogador1->nome);
+    mvprintw(1, 1,"Nome Jogador 1: ");
+    getstr(jogador1->nome);
     
+    } else {
+    mvprintw(1,1,"Nome Jogador 1: %s", jogador1->nome);
+    }
 
     if(jogador2->nome == NULL){
-        //jogador2->nome  = malloc(20);
+        jogador2->nome  = malloc(20);
         mvprintw(1,110,"Nome Jogador 2: ");
         getstr(jogador2->nome);
 
