@@ -9,16 +9,12 @@
 #include "global.h"
 
 int Hpredios[8];
-char *p1, *p2;
 Play *jogador1, *jogador2;
-
-void pickLevel();
-void ranking();
 
 int main(void){
     char menu[3][10] = {"Jogar", "Ranking", "Sair"};
     char titulo[] = {"GORILLAS"};
-    int index = 0;
+    unsigned short index = 0;
 
     jogador1 = calloc(1, sizeof(Play));
     jogador2 = calloc(1, sizeof(Play));
@@ -38,8 +34,11 @@ int main(void){
         pickLevel();
     else if(menu[index] == menu[1])
         ranking();
-    else if (menu[index] == menu[2])
+    else if (menu[index] == menu[2]){
+        free(jogador1);
+        free(jogador2);
         endwin();
+    }
 
     getch();
     endwin();

@@ -4,9 +4,9 @@
 
 int changeColor(char x[3][10], char y[]) //mudar cor ao usar setas down e up
 {
-    int index = 0;
-    int escolha = 0;
-    int tamanho = strlen(y);
+    short index = 0;
+    unsigned short escolha = 0;
+    unsigned short tamanho = strlen(y);
 
     WINDOW * janela = newwin(Y, X, 0, 0);
     box(janela,0,0);

@@ -14,8 +14,8 @@ void buildMap(int nivel) {
     init_pair(1, COLOR_BLACK, COLOR_BLUE);
     init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 
-    int h = 0;
-    int c = 0;
+    unsigned short h = 0;
+    unsigned short c = 0;
     srand(time(NULL));
 
     for(int i = 0; i < 100; i++){

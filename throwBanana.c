@@ -12,8 +12,8 @@ extern Play *jogador1, *jogador2;
 int throwBanana(int ang, int vel, int jogador) {
     float angRad, tempo;
     double seno, cosseno;
-    int x, y, g, status;
-    g = 10;
+    short x, y;
+    unsigned short g = 10;
 
     angRad = ang*3.14/180;
     seno = sin(angRad);

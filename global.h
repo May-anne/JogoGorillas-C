@@ -13,9 +13,8 @@
 
     typedef struct{
     char *nome;
-    char angulo[5];
-    char velocidade[5];
-    int angtoInt, veltoInt, placar;
+    char angulo[5], velocidade[5];
+    unsigned short angtoInt, veltoInt, placar;
     } Play;
 
 #endif

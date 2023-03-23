@@ -16,8 +16,7 @@ int play(int nivel) {
     clear();
     refresh();
 
-    int ver;
-    int vez = 0;
+    unsigned short vez = 0;
     int controle;
 
     WINDOW * janela = newwin(Y, X, 0, 0);
@@ -31,16 +30,16 @@ int play(int nivel) {
     buildMap(nivel); //Chamada de função para construir mapa
 
     if(jogador1->nome == NULL){
-    jogador1->nome = malloc(20);
-    mvprintw(1, 1,"Nome Jogador 1: ");
-    getstr(jogador1->nome);
+        jogador1->nome = malloc(20 *sizeof(char));
+        mvprintw(1, 1,"Nome Jogador 1: ");
+        getstr(jogador1->nome);
 
     } else {
-    mvprintw(1,1,"Nome Jogador 1: %s", jogador1->nome);
+        mvprintw(1,1,"Nome Jogador 1: %s", jogador1->nome);
     }
 
     if(jogador2->nome == NULL){
-        jogador2->nome  = malloc(20);
+        jogador2->nome  = malloc(20 * sizeof(char));
         mvprintw(1,110,"Nome Jogador 2: ");
         getstr(jogador2->nome);
 
@@ -94,7 +93,7 @@ int play(int nivel) {
             
             controle = getch();
             noecho();
-            if(controle=='q'){
+            if(controle=='q'){ //Para sair do jogo a qualquer momento (em que não esteja sendo pedido algum dado)
                 break;
             }
             refresh();
@@ -126,7 +125,8 @@ int play(int nivel) {
             if((strlen(jogador2->velocidade)==0)||(strlen(jogador2->angulo)==0))
                 goto escolha_2;
 
-            jogador2->angtoInt = atoi(jogador2->angulo); //Conversão char -> int
+            //Conversão char -> int
+            jogador2->angtoInt = atoi(jogador2->angulo);
             jogador2->veltoInt = atoi(jogador2->velocidade);
             throwBanana(jogador2->angtoInt, jogador2->veltoInt, 2);
             vez++;
@@ -135,7 +135,7 @@ int play(int nivel) {
 
             controle = getch();
             noecho();
-            if(controle=='q'){
+            if(controle=='q'){ //Para sair do jogo a qualquer momento (em que não esteja sendo pedido algum dado)
                 break;
             }
 

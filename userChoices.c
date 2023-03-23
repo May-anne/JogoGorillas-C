@@ -5,10 +5,9 @@
 void pickLevel () {
 
     char dificuldade[3][10] = {"Facil", "Normal", "Dificil"};
-    int play(int nivel);
     char titulo[] = {"ESCOLHA UMA DIFICULDADE"};
-    int index;
-    int ValorLevel = 0;
+    short index;
+    unsigned short ValorLevel = 0;
 
     WINDOW * janela = newwin(Y, X, 0, 0);
     box(janela,0,0);
@@ -36,9 +35,9 @@ void keepPlaying() {
     refresh();
     wrefresh(janela);
 
-    char options[3][10] = {"Yes", "No"};
-    char titulo[] = {"Do you want to keep playing?"};
-    int index = 0;
+    char options[3][10] = {"Sim", "Nao"};
+    char titulo[] = {"Voce deseja continuar jogando?"};
+    short index = 0;
 
     index = changeColor(options, titulo);
 
